@@ -19,15 +19,16 @@ class Board extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      squares: Array(9).fill(null),
+      name: "",
+      squares: Array(9).fill(null), //Array of 9 nulls correspond to 9 squares
     };
   }
 
   renderSquare(i) {
     return (
       <Square
-        value={this.state.squares[i]}
-        onClick={() => this.handleClick(i)}
+        value={this.state.squares[i]} //reads the value of the Board
+        onClick={() => this.handleClick(i)} //passing down a fn from Board to Square, Square calls the fn when clicked
       />
     );
   }
