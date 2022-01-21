@@ -2,17 +2,12 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 
-class Square extends React.Component {
-  render() {
-    return (
-      <button
-        className="square"
-        onClick={() => this.props.onClick({ value: "X" })} //Tells React to set up a click event listener.
-      >
-        {this.props.value}
-      </button>
-    );
-  }
+function Square(props) {
+  return (
+    <button className="square" onClick={props.onClick}>
+      {props.value}
+    </button>
+  );
 }
 
 class Board extends React.Component {
@@ -20,13 +15,17 @@ class Board extends React.Component {
     super(props);
     this.state = {
       squares: Array(9).fill(null), //Array of 9 nulls correspond to 9 squares
+      xIsNext: true, //First move is "X" by default
     };
   }
 
   handleClick(i) {
-    const squares = this.state.squares.slice();  //creating a copy of the squares array
-    squares[i] = "X";
-    this.setState({ squares: squares });
+    const squares = this.state.squares.slice(); //creating a copy of the squares array
+    squares[i] = this.state.xIsNext ? "X" : "O"; // Each move the boolean value flips.
+    this.setState({
+      squares: squares,
+      xIsNext: !this.state.xIsNext,
+    });
   }
 
   renderSquare(i) {
@@ -39,7 +38,7 @@ class Board extends React.Component {
     );
   }
   render() {
-    const status = "Next Player: X";
+    const status = `Next Player: ${this.state.xIsNext ? "X" : "O"}`;
 
     return (
       <div>
