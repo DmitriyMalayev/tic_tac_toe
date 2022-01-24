@@ -9,7 +9,6 @@ function Square(props) {
     </button>
   );
 }
-
 class Board extends React.Component {
   constructor(props) {
     super(props);
@@ -32,7 +31,8 @@ class Board extends React.Component {
     return (
       <Square
         value={this.state.squares[i]} //reads the value of the Board
-        onClick={() => this.handleClick(i)} //passing down a fn from Board to Square, Square calls the fn when clicked
+        onClick={() => this.handleClick(i)}
+        //passing down a fn from Board to Square, Square calls the fn when clicked
         //Since the Board pass onClick {() => this.handleClick(i)} to Square, the Square calls the Board's handleClick(i) when clicked.
       />
     );
